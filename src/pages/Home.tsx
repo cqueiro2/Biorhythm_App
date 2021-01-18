@@ -1,8 +1,7 @@
 import {
-  IonContent,
+ IonContent,
   IonDatetime,
-  IonHeader,
-  IonInput,
+  IonHeader, 
   IonItem,
   IonLabel,
   IonPage,
@@ -11,11 +10,16 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 
+import BiorhythmCard from "../components/BiorhythmCard";
+
 import "./Home.css";
 
 const Home: React.FC = () => {
-  const [name, setName] = useState('')
-  const [birthDate, setBirthDate] = useState<string>('')
+  
+  const [birthDate, setBirthDate] = useState<string>('');
+   const [targetDate, setTargetDate] = useState(new Date().toISOString())
+ 
+
   return (
     <IonPage>
       <IonHeader>
@@ -24,22 +28,25 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonItem>
-          <IonLabel position="stacked">Name</IonLabel>
-          <IonInput value={name} 
-          onIonChange={(event: any) => setName(event.detail.value)}
-          />
-        </IonItem>
+      {birthDate &&
+        <BiorhythmCard birthDate={birthDate} targetDate={targetDate}/>
+        }
         <IonItem>
           <IonLabel position="stacked">Date of Birth</IonLabel>
           <IonDatetime 
-          displayFormat="D-MMM-YYYY"
-          value={birthDate}
+           displayFormat="D-MMM-YYYY"
+           value={birthDate}
            onIonChange={event => setBirthDate(event.detail.value!)}
-          />
+           />          
         </IonItem>
-        <p>Name: {name}</p>
-        <p>Date of Birth: {birthDate}</p>
+        <IonItem>
+          <IonLabel position="stacked">Target Date</IonLabel>
+          <IonDatetime 
+           displayFormat="D-MMM-YYYY"
+           value={targetDate}
+           onIonChange={event => setTargetDate(event.detail.value!)}
+           />          
+        </IonItem>
       </IonContent>
     </IonPage>
   );
