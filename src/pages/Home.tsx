@@ -11,13 +11,14 @@ import {
 import React, { useState } from "react";
 
 import BiorhythmCard from "../components/BiorhythmCard";
+import {useLocalStorage} from '../hooks';
 
 import "./Home.css";
 
 const Home: React.FC = () => {
   
-  const [birthDate, setBirthDate] = useState<string>('');
-   const [targetDate, setTargetDate] = useState(new Date().toISOString())
+   const [birthDate, setBirthDate] = useLocalStorage('birthDate','')
+   const [targetDate, setTargetDate] = useState(new Date().toISOString());
  
 
   return (
